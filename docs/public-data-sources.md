@@ -87,7 +87,7 @@ author error is inferred.
 
 | Project | Dataset ID | Observed issue | Classification | Scientific impact | Fixed? | Regression | Release impact |
 |---|---|---|---|---|---|---|---|
-| FTProductLab | FTP-PUB-002 | 0.1.0 plotted observed fractions with the measured total but fitted fractions with a separate predicted total | implementation bug | Misleading fitted-line vertical position when supplied carbons extend beyond the fit range; fitted alpha/residuals/JSON raw predictions were correct | Yes | `test_cambridge_fit_plot_uses_the_observed_measured_range_denominator` | Patch required |
+| FTProductLab | FTP-PUB-002 | 0.1.0 plotted observed fractions with the measured total but fitted fractions with a separate predicted total | implementation bug | Misleading fitted-line vertical position when supplied carbons extend beyond the fit range; fitted alpha/residuals/JSON raw predictions were correct | Yes | `test_cambridge_fit_plot_uses_the_observed_measured_range_denominator` | Corrected in 0.1.1 |
 | FTProductLab | FTP-PUB-003 | Table S1 and Table S2 C4 totals differ by 0.0026 g/day; olefin range note exceeds populated rows | publication/data discrepancy | Attribution/interpretation only; no software correction justified | No code change | Documented comparison | None |
 
 ## Explicitly not validated
