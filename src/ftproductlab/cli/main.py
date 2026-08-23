@@ -9,7 +9,12 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from ftproductlab import __version__
-from ftproductlab.application import AnalysisRequest, analyze_and_export
+from ftproductlab.application import (
+    DEFAULT_CUTS,
+    AnalysisRequest,
+    analyze_and_export,
+    parse_cut_specs,
+)
 from ftproductlab.core import InputBasis, ProductRecord, Weighting, analyze_distribution
 from ftproductlab.core.models import FitConfig
 from ftproductlab.io import result_to_dict
@@ -32,6 +37,13 @@ def _parser() -> argparse.ArgumentParser:
         "--weighting", choices=[item.value for item in Weighting], default="uniform"
     )
     analyze.add_argument("--include-below-detection", action="store_true")
+    analyze.add_argument(
+        "--cut",
+        action="append",
+        dest="cuts",
+        metavar="LABEL:MIN[:MAX]",
+        help="Product cut; repeat to replace defaults (empty/omitted MAX means open-ended)",
+    )
     analyze.add_argument("--output", type=Path, required=True)
     analyze.add_argument(
         "--plots", action="store_true", help="Export PNG, SVG, and PDF scientific figures"
@@ -65,6 +77,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         fit_maximum=arguments.fit_max,
         weighting=Weighting(arguments.weighting),
         include_below_detection=arguments.include_below_detection,
+        cuts=parse_cut_specs(arguments.cuts) if arguments.cuts else DEFAULT_CUTS,
     )
     try:
         result = analyze_and_export(request, arguments.output)

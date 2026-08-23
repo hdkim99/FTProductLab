@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -23,6 +24,27 @@ DEFAULT_CUTS = (
     CutDefinition("C13-C20", 13, 20),
     CutDefinition("C21+", 21, None),
 )
+
+
+def parse_cut_specs(specifications: Sequence[str]) -> tuple[CutDefinition, ...]:
+    """Parse repeatable ``LABEL:MIN[:MAX]`` cut specifications.
+
+    An omitted or empty maximum denotes an open-ended cut. Parsing lives in the
+    application layer so CLI and GUI use the same convention.
+    """
+
+    cuts: list[CutDefinition] = []
+    for specification in specifications:
+        parts = specification.strip().split(":")
+        if len(parts) not in {2, 3} or not parts[0].strip() or not parts[1].strip():
+            raise ValueError(
+                f"invalid cut {specification!r}; expected LABEL:MIN[:MAX], for example C5+:5"
+            )
+        maximum = None if len(parts) == 2 or not parts[2].strip() else int(parts[2])
+        cuts.append(CutDefinition(parts[0].strip(), int(parts[1]), maximum))
+    if not cuts:
+        raise ValueError("at least one product cut is required")
+    return tuple(cuts)
 
 
 @dataclass(frozen=True, slots=True)

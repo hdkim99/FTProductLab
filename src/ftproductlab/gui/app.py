@@ -9,7 +9,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-from ftproductlab.application import AnalysisRequest, analyze_and_export
+from ftproductlab.application import AnalysisRequest, analyze_and_export, parse_cut_specs
 from ftproductlab.core import AnalysisResult, InputBasis, Weighting
 
 
@@ -24,6 +24,7 @@ class MainWindow(ttk.Frame):
         self.fit_minimum = tk.StringVar(value="3")
         self.fit_maximum = tk.StringVar(value="20")
         self.weighting = tk.StringVar(value=Weighting.UNIFORM.value)
+        self.cut_specs = tk.StringVar(value="C1:1:1; C2-C4:2:4; C5+:5")
         self.status = tk.StringVar(value="Choose a CSV file and an explicit fit range.")
         self.last_result: AnalysisResult | None = None
         self._build()
@@ -64,8 +65,12 @@ class MainWindow(ttk.Frame):
             state="readonly",
             width=10,
         ).grid(row=0, column=7)
+        ttk.Label(self, text="Product cuts").grid(row=3, column=0, sticky="w", pady=4)
+        ttk.Entry(self, textvariable=self.cut_specs).grid(
+            row=3, column=1, columnspan=2, sticky="ew", padx=6, pady=4
+        )
         self.analyze_button = ttk.Button(self, text="Analyze and export", command=self.run_analysis)
-        self.analyze_button.grid(row=3, column=0, columnspan=3, sticky="ew", pady=5)
+        self.analyze_button.grid(row=4, column=0, columnspan=3, sticky="ew", pady=5)
 
         columns = ("carbon", "observed", "fitted", "deviation")
         self.results = ttk.Treeview(self, columns=columns, show="headings", height=12)
@@ -76,10 +81,10 @@ class MainWindow(ttk.Frame):
         ):
             self.results.heading(column, text=label)
             self.results.column(column, width=145, anchor="e")
-        self.results.grid(row=4, column=0, columnspan=3, sticky="nsew", pady=6)
-        self.rowconfigure(4, weight=1)
+        self.results.grid(row=5, column=0, columnspan=3, sticky="nsew", pady=6)
+        self.rowconfigure(5, weight=1)
         ttk.Label(self, textvariable=self.status, wraplength=720).grid(
-            row=5, column=0, columnspan=3, sticky="w", pady=4
+            row=6, column=0, columnspan=3, sticky="w", pady=4
         )
 
     def _choose_input(self) -> None:
@@ -106,6 +111,7 @@ class MainWindow(ttk.Frame):
                 fit_minimum=int(self.fit_minimum.get()),
                 fit_maximum=int(self.fit_maximum.get()),
                 weighting=Weighting(self.weighting.get()),
+                cuts=parse_cut_specs(self.cut_specs.get().split(";")),
             )
             output = Path(self.output_path.get())
             if not self.input_path.get().strip() or not self.output_path.get().strip():

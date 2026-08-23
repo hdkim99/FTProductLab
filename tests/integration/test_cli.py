@@ -22,6 +22,10 @@ def test_cli_analyze_and_export(tmp_path: Path) -> None:
             "5",
             "--fit-max",
             "20",
+            "--cut",
+            "C5-C10:5:10",
+            "--cut",
+            "C11+:11",
             "--output",
             os.fspath(output),
         ],
@@ -31,6 +35,7 @@ def test_cli_analyze_and_export(tmp_path: Path) -> None:
     )
     payload = json.loads(completed.stdout)
     assert 0 < payload["fit"]["alpha"] < 1
+    assert [cut["label"] for cut in payload["cuts"]] == ["C5-C10", "C11+"]
     assert {path.name for path in output.iterdir()} == {
         "analysis.json",
         "cuts.csv",

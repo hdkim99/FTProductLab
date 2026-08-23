@@ -37,6 +37,7 @@ formula, for example `brew install python-tk@3.14`.
 ```bash
 ftproductlab analyze examples/sample_distribution.csv \
   --basis molar --fit-min 5 --fit-max 20 \
+  --cut C1:1:1 --cut C2-C4:2:4 --cut C5+:5 \
   --output ftproductlab-output --plots
 ```
 
@@ -81,7 +82,8 @@ Required columns are `carbon_number` and `amount`. Optional columns are `categor
 
 Amounts may use any consistent scale. Zero measurements remain in output but cannot enter a
 logarithmic fit. Below-detection records remain visible and are excluded from fitting by
-default.
+default. Repeat `--cut LABEL:MIN[:MAX]` to define CLI cuts; the GUI exposes the same cut
+specification, and the Python API accepts `CutDefinition` objects directly.
 
 ## Scientific basis
 
