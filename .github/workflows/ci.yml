@@ -37,6 +37,29 @@ jobs:
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.14"
+      - name: Configure established Tk and Xvfb runtime
+        env:
+          FTPRODUCTLAB_GUI_RUNTIME: /opt/catalysttwin-actions/shared-gui-runtime
+        run: |
+          set -eu
+          runtime="$FTPRODUCTLAB_GUI_RUNTIME"
+          bin_dir="$runtime/usr/bin"
+          lib_dir="$runtime/usr/lib/aarch64-linux-gnu"
+          tk_dir="$runtime/usr/share/tcltk/tk8.6"
+          test -d "$bin_dir"
+          test -d "$lib_dir"
+          test -d "$tk_dir"
+          printf '%s\n' "$bin_dir" >> "$GITHUB_PATH"
+          {
+            printf 'LD_LIBRARY_PATH=%s\n' "$lib_dir${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+            printf 'TK_LIBRARY=%s\n' "$tk_dir"
+          } >> "$GITHUB_ENV"
+          export PATH="$bin_dir:$PATH"
+          export LD_LIBRARY_PATH="$lib_dir${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          export TK_LIBRARY="$tk_dir"
+          command -v Xvfb
+          command -v xvfb-run
+          python -c 'import tkinter; print(tkinter.TkVersion)'
       - name: Create isolated environment
         run: python -m venv .ci-venv
       - name: Install project
