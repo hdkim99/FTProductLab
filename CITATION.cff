@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use FTProductLab, please cite the software and the scientific sources for the ASF convention."
+title: "FTProductLab"
+type: software
+version: 0.1.0
+date-released: 2026-08-23
+authors:
+  - family-names: "Kim"
+    given-names: "Peter"
+repository-code: "https://github.com/hdkim99/FTProductLab"
+url: "https://github.com/hdkim99/FTProductLab"
+license: BSD-3-Clause
+keywords:
+  - Fischer-Tropsch
+  - Anderson-Schulz-Flory
+  - catalysis
+  - product distribution
+references:
+  - type: article
+    title: "Molecular Size Distribution in Linear Condensation Polymers"
+    authors:
+      - family-names: "Flory"
+        given-names: "Paul J."
+    journal: "Journal of the American Chemical Society"
+    year: 1936
+    doi: "10.1021/ja01301a016"

@@ -1,0 +1,20 @@
+name: Scientific result question
+description: Ask about an equation, basis, fit convention, or numerical result.
+title: "[Scientific result]: "
+labels: [scientific-result]
+body:
+  - type: markdown
+    attributes:
+      value: Do not post confidential or unpublished datasets. Reduce the case to synthetic or public data.
+  - type: textarea
+    id: definition
+    attributes: {label: Equation or definition, description: State input basis, fit range, and weighting.}
+    validations: {required: true}
+  - type: textarea
+    id: expected
+    attributes: {label: Independent calculation or reference, description: Provide DOI and exact convention where possible.}
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes: {label: FTProductLab version}
+    validations: {required: true}

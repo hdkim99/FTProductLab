@@ -1,0 +1,32 @@
+carbon_number,amount,category,species,molecular_weight_g_mol,below_detection
+1,0.245,paraffin,methane,16.043,false
+2,0.018,paraffin,ethane,30.070,false
+2,0.007,olefin,ethene,28.054,false
+3,0.072,paraffin,propane,44.097,false
+3,0.048,olefin,propene,42.081,false
+4,0.064,paraffin,butanes,58.124,false
+4,0.036,olefin,butenes,56.108,false
+5,0.055,paraffin,C5 paraffins,72.151,false
+5,0.027,olefin,C5 olefins,70.135,false
+6,0.047,paraffin,C6 paraffins,86.178,false
+6,0.020,olefin,C6 olefins,84.162,false
+7,0.039,paraffin,C7 paraffins,100.205,false
+7,0.014,olefin,C7 olefins,98.189,false
+8,0.032,paraffin,C8 paraffins,114.232,false
+8,0.010,olefin,C8 olefins,112.216,false
+9,0.026,paraffin,C9 paraffins,128.259,false
+9,0.007,olefin,C9 olefins,126.243,false
+10,0.021,paraffin,C10 paraffins,142.286,false
+10,0.005,olefin,C10 olefins,140.270,false
+11,0.017,paraffin,C11 paraffins,156.313,false
+11,0.0035,olefin,C11 olefins,154.297,false
+12,0.014,paraffin,C12 paraffins,170.340,false
+12,0.0024,olefin,C12 olefins,168.324,false
+13,0.011,paraffin,C13 paraffins,184.367,false
+14,0.009,paraffin,C14 paraffins,198.394,false
+15,0.0074,paraffin,C15 paraffins,212.421,false
+16,0.0061,paraffin,C16 paraffins,226.448,false
+17,0.0050,paraffin,C17 paraffins,240.475,false
+18,0.0041,paraffin,C18 paraffins,254.502,false
+19,0.0034,paraffin,C19 paraffins,268.529,false
+20,0.0028,paraffin,C20 paraffins,282.556,false

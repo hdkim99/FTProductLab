@@ -1,0 +1,20 @@
+name: Bug report
+description: Report reproducible software behavior that appears incorrect.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not upload unpublished, confidential, proprietary, or identifying research data.
+  - type: textarea
+    id: description
+    attributes: {label: What happened?, description: Include the command and expected behavior.}
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes: {label: FTProductLab version}
+    validations: {required: true}
+  - type: textarea
+    id: reproducer
+    attributes: {label: Minimal public or synthetic reproducer}
+    validations: {required: true}

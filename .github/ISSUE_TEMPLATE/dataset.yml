@@ -1,0 +1,24 @@
+name: Real dataset compatibility
+description: Propose a public dataset or report a documented import limitation.
+title: "[Dataset]: "
+labels: [dataset]
+body:
+  - type: markdown
+    attributes:
+      value: Only public, redistributable data may be linked. Do not attach confidential research data.
+  - type: input
+    id: doi
+    attributes: {label: DOI or stable repository URL}
+    validations: {required: true}
+  - type: input
+    id: license
+    attributes: {label: Dataset license}
+    validations: {required: true}
+  - type: textarea
+    id: schema
+    attributes: {label: Files, checksum, and column definitions}
+    validations: {required: true}
+  - type: textarea
+    id: scope
+    attributes: {label: Proposed validation scope}
+    validations: {required: true}

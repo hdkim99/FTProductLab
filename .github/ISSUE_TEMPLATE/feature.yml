@@ -1,0 +1,17 @@
+name: Feature request
+description: Propose one evidence-backed research workflow.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: workflow
+    attributes: {label: Researcher workflow and decision supported}
+    validations: {required: true}
+  - type: textarea
+    id: science
+    attributes: {label: Scientific definition, assumptions, and references}
+    validations: {required: true}
+  - type: textarea
+    id: exclusions
+    attributes: {label: Explicit non-goals and validity limits}
+    validations: {required: true}
