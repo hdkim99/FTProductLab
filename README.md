@@ -127,13 +127,14 @@ Details: [validation record](docs/validation.md).
 
 ## Supported platforms
 
-- Python 3.10–3.14
+- Python 3.10–3.14 for the core and CLI
 - Linux scientific core/CLI and Xvfb GUI checks on the project DGX runner
 - macOS GUI workflow on GitHub-hosted macOS plus local Apple Silicon smoke testing
 - Tk 8.6 or newer; no Qt binding is used or installed
 
-Local validation currently covers Apple Silicon. Intel macOS is exercised by the hosted
-runner when that runner image is Intel; otherwise it remains explicitly not verified.
+The hosted GUI matrix covers Apple Silicon on Python 3.10 and 3.14 and Intel on Python
+3.13. The `setup-python` 3.10 build on the `macos-15-intel` image is not a supported GUI
+combination because its Tk 8.5 build metadata conflicts with the image's Tk 8.6 runtime.
 See [macOS notes](docs/macos.md).
 
 ## Limitations

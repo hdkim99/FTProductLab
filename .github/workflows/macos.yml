@@ -28,10 +28,15 @@ jobs:
         include:
           - runner: macos-15
             architecture: arm64
+            python: "3.10"
+          - runner: macos-15
+            architecture: arm64
             python: "3.14"
           - runner: macos-15-intel
             architecture: x86_64
-            python: "3.10"
+            # setup-python 3.10 on this image links Tk 8.5 headers to the
+            # image's Tk 8.6 runtime. Python 3.13 is the verified Intel pair.
+            python: "3.13"
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 30
     env:

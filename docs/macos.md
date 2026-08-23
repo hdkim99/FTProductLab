@@ -5,7 +5,7 @@ The official GUI is Tkinter/ttk. No Qt binding is declared, imported, or support
 ## Supported configuration
 
 - macOS 13 or newer
-- Python 3.10–3.14
+- Python 3.10–3.14 for the core and CLI
 - Apple Silicon and Intel where the matching Python installation includes Tk 8.6+
 - launch command: `python -m ftproductlab.gui`
 
@@ -28,6 +28,8 @@ bundles Tk, but its exact Tk version should still be checked.
 - Headless Linux: Xvfb for window workflow tests. This does not replace the macOS job.
 
 The macOS workflow tests a clean wheel installation, core import, CLI, Tk import, window
-creation, main analysis/export workflow, close, and process exit. Intel hardware remains
-not verified if the selected hosted image is Apple Silicon; workflow architecture output is
-recorded in the job log.
+creation, main analysis/export workflow, close, and process exit on Apple Silicon with
+Python 3.10 and 3.14 and Intel with Python 3.13. The `setup-python` Python 3.10 build on
+`macos-15-intel` is explicitly unsupported for the GUI: it was observed linking Tk 8.5
+build metadata against the runner's Tk 8.6 runtime. This is a toolchain mismatch rather
+than an application failure; core and CLI Python 3.10 support remains tested on DGX.
