@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use FTProductLab, please cite the software and the scientific sources for the ASF convention."
 title: "FTProductLab"
 type: software
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-08-23
 authors:
   - family-names: "Kim"

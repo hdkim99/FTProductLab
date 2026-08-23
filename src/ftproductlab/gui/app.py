@@ -9,7 +9,12 @@ from collections.abc import Sequence
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-from ftproductlab.application import AnalysisRequest, analyze_and_export, parse_cut_specs
+from ftproductlab.application import (
+    AnalysisRequest,
+    analyze_and_export,
+    fitted_observed_total_fractions,
+    parse_cut_specs,
+)
 from ftproductlab.core import AnalysisResult, InputBasis, Weighting
 
 
@@ -76,7 +81,12 @@ class MainWindow(ttk.Frame):
         self.results = ttk.Treeview(self, columns=columns, show="headings", height=12)
         for column, label in zip(
             columns,
-            ("C number", "Observed molar fraction", "Fitted range fraction", "Relative deviation"),
+            (
+                "C number",
+                "Observed molar fraction",
+                "Fitted (same denominator)",
+                "Relative deviation",
+            ),
             strict=True,
         ):
             self.results.heading(column, text=label)
@@ -128,14 +138,15 @@ class MainWindow(ttk.Frame):
         self.last_result = result
         for item in self.results.get_children():
             self.results.delete(item)
-        for point in result.points:
+        fitted_fractions = fitted_observed_total_fractions(result)
+        for point, fitted_fraction in zip(result.points, fitted_fractions, strict=True):
             self.results.insert(
                 "",
                 "end",
                 values=(
                     point.carbon_number,
                     f"{point.observed_molar_fraction:.6g}",
-                    f"{point.predicted_range_fraction:.6g}",
+                    f"{fitted_fraction:.6g}",
                     f"{point.relative_deviation:+.3%}",
                 ),
             )

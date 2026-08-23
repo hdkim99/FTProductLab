@@ -5,7 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from ftproductlab.core.models import AnalysisResult, RatioStatus
+from ftproductlab.application import fitted_observed_total_fractions
+from ftproductlab.core.models import AnalysisResult, InputBasis, RatioStatus
 
 
 def _pyplot() -> Any:
@@ -19,6 +20,16 @@ def _pyplot() -> Any:
             'Plot dependencies are not installed. Install with: pip install "ftproductlab[plot]"'
         ) from error
     return plt
+
+
+def _distribution_ylabel(basis: InputBasis) -> str:
+    if basis is InputBasis.MOLAR:
+        prefix = "Molar fraction"
+    elif basis is InputBasis.MASS:
+        prefix = "Molar-equivalent fraction (from mass input)"
+    else:
+        prefix = "Molar-equivalent fraction (from carbon input)"
+    return f"{prefix}; measured-range denominator"
 
 
 def export_publication_figures(
@@ -35,10 +46,15 @@ def export_publication_figures(
 
     carbons = [point.carbon_number for point in result.points]
     observed = [point.observed_molar_fraction for point in result.points]
-    fitted = [point.predicted_range_fraction for point in result.points]
+    fitted = fitted_observed_total_fractions(result)
     figure, axis = plt.subplots(figsize=(7.2, 4.8), constrained_layout=True)
     axis.semilogy(carbons, observed, "o", label="Observed (measured-range normalized)")
-    axis.semilogy(carbons, fitted, "-", label=f"Single-alpha fit (alpha={result.fit.alpha:.4f})")
+    axis.semilogy(
+        carbons,
+        fitted,
+        "-",
+        label=f"Single-alpha fit (same denominator; alpha={result.fit.alpha:.4f})",
+    )
     axis.axvspan(
         result.fit_config.minimum_carbon,
         result.fit_config.maximum_carbon,
@@ -46,7 +62,11 @@ def export_publication_figures(
         alpha=0.08,
         label="User fit range",
     )
-    axis.set(xlabel="Carbon number", ylabel="Molar fraction", title="FT product distribution")
+    axis.set(
+        xlabel="Carbon number",
+        ylabel=_distribution_ylabel(result.basis),
+        title="FT product distribution",
+    )
     axis.legend(frameon=False)
     axis.grid(alpha=0.2)
     created.extend(_save(figure, destination, "asf_fit", formats))
@@ -121,7 +141,7 @@ def export_social_preview(result: AnalysisResult, destination: str | Path) -> Pa
     )
     distribution_axis.semilogy(
         carbons,
-        [point.predicted_range_fraction for point in result.points],
+        fitted_observed_total_fractions(result),
         "-",
         color="#e36a25",
         linewidth=2.2,
@@ -129,7 +149,7 @@ def export_social_preview(result: AnalysisResult, destination: str | Path) -> Pa
     )
     distribution_axis.set_title("FT product distribution", loc="left", weight="bold")
     distribution_axis.set_xlabel("Carbon number")
-    distribution_axis.set_ylabel("Molar fraction")
+    distribution_axis.set_ylabel(_distribution_ylabel(result.basis))
     distribution_axis.legend(frameon=False)
     distribution_axis.grid(alpha=0.2)
     residual_axis.axhline(0, color="black", linewidth=0.8)

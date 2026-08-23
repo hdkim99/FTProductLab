@@ -47,8 +47,11 @@ model. R² is reported only as a descriptive transformed-coordinate statistic.
 
 Predicted raw amounts come from the fitted intercept and slope. Log residual is
 `ln(observed/predicted)` and relative deviation is `(observed-predicted)/predicted`.
-Prediction fractions shown on observed-vs-fitted plots are normalized only over supplied
-carbon numbers and labeled accordingly.
+Observed fractions and fitted values shown together use the same denominator: the total
+observed molar-equivalent amount over the supplied carbon numbers. Normalizing the fitted
+curve by its own predicted total would change its vertical scale and visually contradict
+the free-intercept regression. The JSON field `predicted_range_fraction` remains a separate
+predicted-distribution normalization and is not used as the fitted overlay.
 
 Observed product cuts report both molecular and carbon fractions closing over supplied
 measurements. Users define cut boundaries; names alone never imply universal gasoline,

@@ -1,0 +1,23 @@
+carbon_number,amount,category,species,molecular_weight_g_mol,below_detection
+10,0.016117344,paraffin,C10 wax aggregate,,false
+30,0.020135276,paraffin,C30 wax aggregate,,false
+31,0.018860987,paraffin,C31 wax aggregate,,false
+32,0.017254612,paraffin,C32 wax aggregate,,false
+33,0.016420966,paraffin,C33 wax aggregate,,false
+34,0.015437337,paraffin,C34 wax aggregate,,false
+35,0.014168081,paraffin,C35 wax aggregate,,false
+36,0.013347941,paraffin,C36 wax aggregate,,false
+37,0.012449051,paraffin,C37 wax aggregate,,false
+38,0.011433192,paraffin,C38 wax aggregate,,false
+39,0.010521790,paraffin,C39 wax aggregate,,false
+40,0.009679719,paraffin,C40 wax aggregate,,false
+41,0.008908274,paraffin,C41 wax aggregate,,false
+42,0.008218712,paraffin,C42 wax aggregate,,false
+43,0.007605095,paraffin,C43 wax aggregate,,false
+44,0.007026543,paraffin,C44 wax aggregate,,false
+45,0.006514022,paraffin,C45 wax aggregate,,false
+46,0.006327764,paraffin,C46 wax aggregate,,false
+47,0.005901758,paraffin,C47 wax aggregate,,false
+48,0.005619246,paraffin,C48 wax aggregate,,false
+49,0.005261389,paraffin,C49 wax aggregate,,false
+50,0.004891416,paraffin,C50 wax aggregate,,false

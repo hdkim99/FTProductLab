@@ -120,12 +120,15 @@ See [the scientific-basis document](docs/scientific-basis.md) for conventions an
 - Species aggregation, mass-to-mole conversion, C1/C2 deviations, product-cut closure,
   O/P zero denominators, detection flags, CSV, CLI, GUI export, plotting, and import
   isolation are tested.
-- The open-access Partington et al. Co/TiO2 study reports alpha=0.92 for C10–C40 and provides
-  a useful external target, but repository-level numerical reproduction remains pending
-  because a redistributable tabular C10–C40 fixture has not yet been extracted. Synthetic
-  fixtures are never labeled real data.
+- A raw Apollo Ru/TiO2 workbook reproduces three explicit C30–C50 fits; processed industrial
+  Fe/Mn tables exercise mass conversion, range-dependent alpha, residual, C5+, and O/P
+  workflows. The Partington et al. Co/TiO2 study is retained as a published-number/metadata
+  benchmark because its combined C10–C40 values are not tabulated.
+- Public-data validation exposed and now guards one plotting-normalization defect; numeric
+  alpha and residual calculations were unaffected.
 
-Details: [validation record](docs/validation.md).
+Details: [validation record](docs/validation.md) and
+[source/checksum register](docs/public-data-sources.md).
 
 ## Supported platforms
 

@@ -83,3 +83,12 @@ def analyze_and_export(request: AnalysisRequest, output_directory: Path) -> Anal
     result = analyze_file(request)
     write_analysis_bundle(result, output_directory)
     return result
+
+
+def fitted_observed_total_fractions(result: AnalysisResult) -> tuple[float, ...]:
+    """Scale fitted amounts by the denominator used for observed molar fractions."""
+
+    observed_total = sum(point.observed_molar for point in result.points)
+    if observed_total <= 0:  # protected by scientific-core validation
+        raise ValueError("positive observed molar-equivalent total is required")
+    return tuple(point.predicted_molar / observed_total for point in result.points)

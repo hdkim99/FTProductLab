@@ -5,6 +5,7 @@ from .service import (
     AnalysisRequest,
     analyze_and_export,
     analyze_file,
+    fitted_observed_total_fractions,
     parse_cut_specs,
 )
 
@@ -13,5 +14,6 @@ __all__ = [
     "AnalysisRequest",
     "analyze_and_export",
     "analyze_file",
+    "fitted_observed_total_fractions",
     "parse_cut_specs",
 ]
