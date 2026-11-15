@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Build and publish this patch with the fixed PyPI Trusted Publishing action
+  (v1.14.3, GHSA-5xjx-3w67-w9x9). Package behavior is unchanged.
+
 ## 0.1.1 - 2026-08-23
 
 - Correct observed-versus-fitted figure normalization after a public Ru/TiO2 workbook
